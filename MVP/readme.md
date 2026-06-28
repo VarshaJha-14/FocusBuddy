@@ -2,7 +2,7 @@
 
 > A Dropbox-style MVP validation page for FocusBuddy, an AI co-pilot for task paralysis and executive dysfunction.
 
-**Live site:** [yourusername.github.io/focusbuddy](https://yourusername.github.io/focusbuddy)  
+**Live site:** [FocusBuddy](https://focusbuddy-wbo3.onrender.com)  
 **Full PM case study:** [github.com/VarshaJha-14/focusbuddy-pm-case-study](https://github.com/VarshaJha-14/FocusBuddy/tree/main/Documents)  
 
 ---
@@ -56,4 +56,3 @@ This landing page is one artifact in a full end-to-end PM case study covering:
 - Metrics, A/B testing & GTM strategy
 - Wireframes & Figma prototype
 
-→ [View the full case study](https://github.com/yourusername/focusbuddy-pm-case-study)
