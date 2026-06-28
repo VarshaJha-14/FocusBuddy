@@ -4,6 +4,8 @@
 > *"I know exactly what I need to do. I just can't seem to start."*
 > — Rohan, Final-Year CS Student (Primary Persona)
 
+> **Live site:** [FocusBuddy](https://focusbuddy-wbo3.onrender.com)
+
 **FocusBuddy** is a full end-to-end PM case study — from zero-to-one product discovery through PRD, responsible AI design, metrics framework, and go-to-market strategy. It explores how conversational AI can break the neurological freeze response that prevents neurodivergent users from initiating tasks.
 
 ![Status](https://img.shields.io/badge/Status-Case%20Study%20%7C%20MVP%20Concept-blueviolet)
