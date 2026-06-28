@@ -1,0 +1,227 @@
+<div class="content-centered">
+  <div class="card-ingest step-animate-in" style="grid-template-columns: 1fr 1.4fr;">
+
+    <!-- Left panel: completed tasks history -->
+    <div class="panel-left">
+      <div class="section-label" style="color:rgba(255,255,255,0.5); margin-bottom:16px;">
+        <span style="color:#7C6FFF; margin-right:3px;">·</span> Your Victories
+      </div>
+
+      {% if completed_sessions %}
+        <div class="victories-list">
+          {% for session in completed_sessions %}
+          <div class="victory-card">
+            <div class="victory-task">{{ session.task }}</div>
+            <div class="victory-meta">
+              {{ session.steps|length }} steps
+              {% if session.completed_at %}
+                · {{ session.completed_at.strftime('%Y-%m-%d') }}
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="victories-empty">
+          <div class="victories-empty-icon">✦</div>
+          <p>Your completed tasks will appear here.</p>
+          <p style="font-size:11px; opacity:0.5; margin-top:4px;">Finish your first task to see it!</p>
+        </div>
+      {% endif %}
+
+      <div class="trust-list" style="margin-top:auto; padding-top:24px;">
+        <div class="trust-item"><span class="trust-item-dot"></span>Private and encrypted</div>
+        <div class="trust-item"><span class="trust-item-dot"></span>Response in under 3 seconds</div>
+        <div class="trust-item"><span class="trust-item-dot"></span>Built for ADHD minds</div>
+      </div>
+    </div>
+
+    <!-- Right panel: vent form -->
+    <div class="panel-right">
+      <form id="vent-form" onsubmit="submitVent(event)">
+        <div class="section-label" style="margin-bottom:10px;">
+          <span style="color:#7C6FFF; margin-right:3px;">·</span> Capture context
+        </div>
+
+        <textarea
+          id="vent_text"
+          name="vent_text"
+          class="vent-textarea"
+          placeholder="Type or paste what you are struggling to start... The messier the better."
+          required
+          aria-required="true"
+        ></textarea>
+
+        <!-- Voice input row -->
+        <div style="display:flex; align-items:center; justify-content:flex-end; gap:10px; margin-top:8px;">
+          <span id="voice-status" style="font-size:10px; color:#9B9BC0; display:none;"></span>
+          <button type="button" id="voice-btn" aria-label="Record voice note" class="btn-ghost-pill">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+              <rect x="3.5" y="1" width="4" height="6" rx="2" stroke="currentColor" stroke-width="1"/>
+              <path d="M1.5 6a4 4 0 0 0 8 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+              <line x1="5.5" y1="10" x2="5.5" y2="8" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+            <span id="voice-label">Voice input</span>
+          </button>
+        </div>
+
+        <!-- Mood selection -->
+        <div class="mood-section">
+          <div class="mood-label">
+            How are <strong>you</strong> feeling right now?
+            <span style="font-weight:400; color:#9B9BC0;">(optional)</span>
+          </div>
+
+          <div class="mood-grid" id="mood-grid">
+            <button type="button" class="mood-pill mood-terrified"   data-value="Terrified / Scared"><span class="mood-pill-dot"></span>Terrified</button>
+            <button type="button" class="mood-pill mood-overwhelmed" data-value="Overwhelmed"><span class="mood-pill-dot"></span>Overwhelmed</button>
+            <button type="button" class="mood-pill mood-low"         data-value="Low Energy"><span class="mood-pill-dot"></span>Low energy</button>
+            <button type="button" class="mood-pill mood-avoiding"    data-value="Avoiding / Procrastinating"><span class="mood-pill-dot"></span>Avoiding</button>
+            <button type="button" class="mood-pill mood-frustrated"  data-value="Frustrated / Angry"><span class="mood-pill-dot"></span>Frustrated</button>
+            <button type="button" class="mood-pill mood-numb"        data-value="Numb / Blank"><span class="mood-pill-dot"></span>Numb</button>
+            <button type="button" class="mood-pill mood-hyper"       data-value="Hyperfocused but stuck"><span class="mood-pill-dot"></span>Hyperfocused</button>
+            <button type="button" class="mood-pill mood-confused"    data-value="Confused / Lost"><span class="mood-pill-dot"></span>Confused</button>
+            <button type="button" class="mood-pill mood-okay"        data-value="Actually okay"><span class="mood-pill-dot"></span>Actually okay</button>
+          </div>
+
+          <input type="hidden" name="cognitive_state" id="cognitive-state-val">
+          <input
+            type="text"
+            id="custom-mood"
+            name="custom_mood"
+            placeholder="Or describe how you're feeling in your own words"
+            class="custom-mood-input"
+          >
+        </div>
+
+        <!-- Bottom row -->
+        <div class="panel-bottom-row">
+          <div class="bottom-tags">
+            <span class="btag"><span class="btag-dot"></span>Private</span>
+            <span class="btag"><span class="btag-dot"></span>Under 3s</span>
+            <span class="btag"><span class="btag-dot"></span>Built for ADHD</span>
+          </div>
+          <button
+            type="submit"
+            id="submit-btn"
+            class="btn-submit-circle"
+            aria-label="Submit"
+            style="position:relative;"
+          >
+            <span class="btn-content">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div class="loading-spinner htmx-indicator" style="display:none; position:absolute;"></div>
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ---------- Init all interactive elements ---------- */
+  function initWorkspace() {
+
+    /* -- Form submit -- */
+    const form = document.getElementById('vent-form');
+    if (form) {
+      form.addEventListener('submit', submitVent);
+    }
+
+    /* -- Voice input -- */
+    let mediaRecorder, audioChunks = [];
+    const voiceBtn    = document.getElementById('voice-btn');
+    const voiceLabel  = document.getElementById('voice-label');
+    const voiceStatus = document.getElementById('voice-status');
+    const textarea    = document.getElementById('vent_text');
+
+    if (!voiceBtn) return;
+
+    function resetVoiceBtn() {
+      voiceBtn.style.borderColor = '';
+      voiceBtn.style.color       = '';
+      voiceLabel.textContent     = 'Voice input';
+      voiceBtn.disabled          = false;
+    }
+
+    voiceBtn.addEventListener('click', async () => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        voiceBtn.style.borderColor = '#C4BFFF';
+        voiceBtn.style.color       = '#7C6FFF';
+        voiceLabel.textContent     = 'Transcribing...';
+        voiceBtn.disabled          = true;
+        return;
+      }
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder  = new MediaRecorder(stream);
+        audioChunks    = [];
+        mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+        mediaRecorder.onstop = async () => {
+          const blob     = new Blob(audioChunks, { type: 'audio/webm' });
+          const formData = new FormData();
+          formData.append('audio', blob, 'recording.webm');
+          try {
+            const res  = await fetch('/transcribe', { method: 'POST', body: formData });
+            const data = await res.json();
+            if (data.text) {
+              textarea.value = textarea.value ? textarea.value + ' ' + data.text : data.text;
+              voiceBtn.style.borderColor = '#6BCB77';
+              voiceBtn.style.color       = '#4CAF82';
+              voiceLabel.textContent     = 'Done — edit above if needed';
+              voiceBtn.disabled          = false;
+              setTimeout(resetVoiceBtn, 3000);
+            } else {
+              voiceLabel.textContent = data.error || 'Something went wrong';
+              voiceBtn.disabled      = false;
+              setTimeout(resetVoiceBtn, 3000);
+            }
+          } catch (err) {
+            console.error('Transcription failed', err);
+            voiceLabel.textContent = 'Transcription failed';
+            voiceBtn.disabled      = false;
+            setTimeout(resetVoiceBtn, 3000);
+          }
+          stream.getTracks().forEach(t => t.stop());
+        };
+        mediaRecorder.start();
+        voiceBtn.style.borderColor = '#FF6B6B';
+        voiceBtn.style.color       = '#FF6B6B';
+        voiceLabel.textContent     = 'Stop recording';
+      } catch (err) {
+        console.error('Could not start recording', err);
+        voiceStatus.textContent   = 'Mic access denied or unavailable.';
+        voiceStatus.style.display = 'block';
+        setTimeout(() => { voiceStatus.style.display = 'none'; }, 3000);
+      }
+    });
+
+    /* -- Mood pills -- */
+    document.querySelectorAll('.mood-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.mood-pill').forEach(p => p.classList.remove('selected'));
+        pill.classList.add('selected');
+        document.getElementById('cognitive-state-val').value = pill.dataset.value;
+        document.getElementById('custom-mood').value = '';
+      });
+    });
+
+    const customMood = document.getElementById('custom-mood');
+    if (customMood) {
+      customMood.addEventListener('input', e => {
+        if (e.target.value) {
+          document.querySelectorAll('.mood-pill').forEach(p => p.classList.remove('selected'));
+          document.getElementById('cognitive-state-val').value = e.target.value;
+        }
+      });
+    }
+  }
+
+  // Run immediately (handles first load)
+  initWorkspace();
+</script>

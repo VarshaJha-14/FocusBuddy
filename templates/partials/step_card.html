@@ -1,0 +1,134 @@
+<div class="step-animate-in">
+
+  <div class="step-section">
+
+    <!-- Header: label + counter -->
+    <div class="step-header">
+      <div class="section-label">Step execution workspace</div>
+      <div class="text-counter">Step {{ current_index + 1 }} of {{ total_steps }}</div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" style="width:{{ progress_pct }}%;"></div>
+    </div>
+
+    <div class="step-sub">Your only job right now</div>
+
+    <!-- Step card -->
+    <div class="step-card">
+      {% if micro_mode %}
+      <div class="micro-badge">Micro-step mode</div>
+      {% endif %}
+
+      <div style="display:flex; align-items:flex-start; gap:14px;">
+        <!-- Checkbox -->
+        <input type="checkbox" class="step-checkbox" aria-label="Mark step complete">
+
+        <div class="step-card-body">
+          <div class="text-step">{{ current_step }}</div>
+
+          {% if micro_mode and encouragement %}
+          <div class="text-step-sub" style="color:#7C6FFF;">{{ encouragement }}</div>
+          {% else %}
+          <div class="text-step-sub">Take a deep breath. Just this one thing for now.</div>
+          {% endif %}
+
+          {% if micro_mode and micro_steps|length > 1 %}
+          <div class="micro-checklist">
+            <div class="micro-checklist-label">Micro-checklist</div>
+            {% for ms in micro_steps %}
+            <div class="micro-checklist-item">
+              <input type="checkbox" id="ms-{{ loop.index }}" style="accent-color:#7C6FFF;">
+              <label for="ms-{{ loop.index }}">{{ ms }}</label>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <input type="hidden" name="session_id" value="{{ session_id }}">
+
+    <!-- Done button -->
+    <button
+      type="button"
+      class="btn-primary-green"
+      hx-post="/feedback/{{ session_id }}"
+      hx-vals='{"action": "done"}'
+      hx-target="#step-container"
+      onclick="this.classList.add('check-pop')"
+      style="margin-top:16px; position:relative;"
+    >
+      <span class="btn-content">Done — next step</span>
+      <span class="btn-chevron" aria-hidden="true">›</span>
+      <div class="loading-spinner htmx-indicator" style="display:none; position:absolute;"></div>
+    </button>
+
+    {% if micro_mode %}
+
+    <!-- Back to main step -->
+    <button
+      type="button"
+      class="btn-back-ghost"
+      hx-post="/feedback/{{ session_id }}"
+      hx-vals='{"action": "back_to_main"}'
+      hx-target="#step-container"
+      style="position:relative;"
+    >
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="btn-content">Back to main step</span>
+      <div class="loading-spinner loading-spinner-dark htmx-indicator" style="display:none; position:absolute;"></div>
+    </button>
+
+    {% else %}
+
+    <!-- Reduce difficulty -->
+    <button
+      type="button"
+      class="btn-secondary"
+      hx-post="/feedback/{{ session_id }}"
+      hx-vals='{"action": "too_hard"}'
+      hx-target="#step-container"
+      style="position:relative;"
+    >
+      <span class="btn-content">That feels too hard — reduce difficulty</span>
+      <div class="loading-spinner loading-spinner-dark htmx-indicator" style="display:none; position:absolute;"></div>
+    </button>
+
+    <!-- Strategy pills -->
+    <div class="strategy-row">
+      <button
+        type="button"
+        class="btn-ghost-pill"
+        hx-post="/feedback/{{ session_id }}"
+        hx-vals='{"action": "too_hard"}'
+        hx-target="#step-container"
+      >
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+          <circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1"/>
+          <path d="M3.5 5.5h4M5.5 3.5v4" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+        Deep overwhelm mode
+      </button>
+      <button
+        type="button"
+        class="btn-ghost-pill"
+        hx-post="/feedback/{{ session_id }}"
+        hx-vals='{"action": "too_hard"}'
+        hx-target="#step-container"
+      >
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+          <path d="M1.5 8.5l2-4 2 2 2-3 2 3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        This step seems off
+      </button>
+    </div>
+
+    {% endif %}
+
+  </div>
+</div>

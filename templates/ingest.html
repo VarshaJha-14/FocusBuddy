@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<script>
+  const PII_PATTERNS = [
+    {pattern: /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/g, replacement: "[EMAIL]"},
+    {pattern: /(?:\+91[\s-]?|0)?[6-9]\d{4}[\s-]?\d{5}/g, replacement: "[PHONE]"},
+    {pattern: /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/g, replacement: "[AADHAAR]"},
+    {pattern: /[A-Z]{5}\d{4}[A-Z]/g, replacement: "[PAN]"},
+    {pattern: /\b\d{3}-\d{2}-\d{4}\b/g, replacement: "[SSN]"}
+  ];
+
+  function scrubBeforeSubmit(event) {
+    const textarea = document.getElementById('vent_text');
+    let text = textarea.value;
+    PII_PATTERNS.forEach(p => { text = text.replace(p.pattern, p.replacement); });
+    textarea.value = text;
+
+    const btn     = document.getElementById('submit-btn');
+    const content = btn.querySelector('.btn-content');
+    const loader  = btn.querySelector('.htmx-indicator');
+    btn.disabled          = true;
+    btn.style.cursor      = 'wait';
+    content.style.opacity = '0';
+    loader.style.display  = 'inline-block';
+    loader.style.position = 'absolute';
+  }
+
+  function rerunScripts(container) {
+  container.querySelectorAll('script').forEach(oldScript => {
+    const newScript = document.createElement('script');
+    [...oldScript.attributes].forEach(attr => newScript.setAttribute(attr.name, attr.value));
+    newScript.textContent = oldScript.textContent;
+    oldScript.parentNode.replaceChild(newScript, oldScript);
+  });
+  // Give DOM a tick to settle, then re-init interactivity
+  setTimeout(() => {
+    if (typeof initWorkspace === 'function') initWorkspace();
+  }, 0);
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="page-shell">
+  <div class="content-centered" style="opacity:0.4;">
+    <div class="loading-spinner" style="margin:auto;"></div>
+  </div>
+</div>
+
+<script>
+  async function submitVent(event) {
+    event.preventDefault();
+    scrubBeforeSubmit(event);
+
+    const formData = new FormData(document.getElementById('vent-form'));
+
+    // Use cached token — no async needed
+    const headers = {};
+    if (_clerkToken) headers['Authorization'] = `Bearer ${_clerkToken}`;
+
+    try {
+      const res = await fetch('/vent', {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+
+      if (res.ok) {
+        const html = await res.text(); // read once
+        document.body.innerHTML = html;
+        htmx.process(document.body);
+      } else {
+        alert('Something went wrong. Please try again.');
+        resetSubmitBtn();
+      }
+    } catch (err) {
+      console.error('Submit failed:', err);
+      alert('Network error. Please try again.');
+      resetSubmitBtn();
+    }
+  }
+
+  function resetSubmitBtn() {
+    const btn = document.getElementById('submit-btn');
+    if (!btn) return;
+    btn.disabled = false;
+    btn.style.cursor = '';
+    const content = btn.querySelector('.btn-content');
+    const loader  = btn.querySelector('.htmx-indicator');
+    if (content) content.style.opacity = '1';
+    if (loader)  loader.style.display  = 'none';
+  }
+
+  async function loadPage() {
+    const shell = document.getElementById('page-shell');
+
+    if (!window.Clerk) {
+      htmx.ajax('GET', '/workspace', { target: '#page-shell', swap: 'innerHTML' });
+      return;
+    }
+
+    try {
+      await window.Clerk.load({
+        routerPush:    (to) => window.location.href    = to,
+        routerReplace: (to) => window.location.replace(to),
+        appearance: { variables: { colorPrimary: '#7C6FFF' } }
+      });
+    } catch (e) {
+      console.warn('Clerk failed to load:', e);
+      htmx.ajax('GET', '/landing', { target: '#page-shell', swap: 'innerHTML' });
+      return;
+    }
+
+    // Prime token cache right after Clerk loads
+    await _refreshClerkToken();
+
+    const clerkUserButtonEl = document.getElementById('clerk-user-button');
+    const privacyBtn        = document.getElementById('privacy-btn');
+
+    function syncHeader() {
+      if (window.Clerk.user) {
+        privacyBtn.style.display        = 'none';
+        clerkUserButtonEl.style.display = 'block';
+        clerkUserButtonEl.innerHTML     = `
+          <button class="btn-ghost" onclick="window.Clerk.signOut()">Sign out</button>
+        `;
+      } else {
+        privacyBtn.style.display        = '';
+        clerkUserButtonEl.style.display = 'none';
+        clerkUserButtonEl.innerHTML     = '';
+      }
+    }
+
+    async function loadPartial() {
+      if (window.Clerk.user) {
+        const res = await fetch('/workspace', {
+          headers: { 'Authorization': `Bearer ${_clerkToken}` }
+        });
+        if (res.ok) {
+          shell.innerHTML = await res.text();
+          rerunScripts(shell);
+        } else {
+          shell.innerHTML = '<p style="color:red;padding:20px;">Failed to load workspace.</p>';
+        }
+      } else {
+        htmx.ajax('GET', '/landing', { target: '#page-shell', swap: 'innerHTML' });
+      }
+    }
+
+    syncHeader();
+
+    // Refresh token + sync header + reload partial on auth state change
+    window.Clerk.addListener(async (resources) => {
+      await _refreshClerkToken();
+      syncHeader();
+
+      if (resources.user && !shell.querySelector('#vent-form')) {
+        await loadPartial();
+      } else if (!resources.user && !shell.querySelector('#get-started-btn')) {
+        htmx.ajax('GET', '/landing', { target: '#page-shell', swap: 'innerHTML' });
+      }
+    });
+
+    await loadPartial();
+  }
+
+  loadPage();
+</script>
+{% endblock %}

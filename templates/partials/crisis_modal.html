@@ -1,0 +1,61 @@
+{% if show_full_page %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Safety notice — FocusBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+{% endif %}
+
+<div id="crisis-modal-overlay" class="crisis-overlay">
+  <div class="crisis-modal">
+
+    <div style="width:36px; height:36px; border-radius:50%; background:#F5F5FF; border:1px solid #E4E0FF; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 3v5M8 11.5v.5" stroke="#7C6FFF" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="8" cy="8" r="6.5" stroke="#7C6FFF" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <h2 class="crisis-heading">You're not alone.</h2>
+    <p class="crisis-body">
+      It sounds like you might be going through something really difficult.
+      FocusBuddy is a task tool, not a crisis service — please reach out to
+      someone who can genuinely help right now.
+    </p>
+
+    <a href="tel:9152987821" class="crisis-btn-primary">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+        <path d="M2 2.5C2 2.5 3 5 5.5 7.5S10.5 11 10.5 11l1.5-1.5-2.5-2-1 1C7 7.5 5.5 6 5.5 6l1-1L4 2.5 2 2.5z" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>
+      </svg>
+      iCall — 9152987821
+    </a>
+
+    <a href="tel:18602662345" class="crisis-btn-outlined">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+        <path d="M2 2.5C2 2.5 3 5 5.5 7.5S10.5 11 10.5 11l1.5-1.5-2.5-2-1 1C7 7.5 5.5 6 5.5 6l1-1L4 2.5 2 2.5z" stroke="#7C6FFF" stroke-width="1" stroke-linejoin="round"/>
+      </svg>
+      Vandrevala Foundation — 1860-2662-345
+    </a>
+
+    <button
+      type="button"
+      class="crisis-dismiss"
+      onclick="document.getElementById('crisis-modal-overlay').remove()"
+    >
+      I'm okay, take me back
+    </button>
+
+  </div>
+</div>
+
+{% if show_full_page %}
+</body>
+</html>
+{% endif %}

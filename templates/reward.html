@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block header_right %}{% endblock %}
+
+{% block content %}
+<div class="content-centered">
+  <div class="reward-section reward-animate">
+
+    <div style="width:36px; height:36px; border-radius:50%; background:#F5F5FF; border:1px solid #E4E0FF; display:flex; align-items:center; justify-content:center; margin:0 auto 20px;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8.5l3.5 3.5 6.5-7" stroke="#7C6FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 class="reward-heading">You started.</h1>
+    <p class="reward-subheading">
+      That's the hardest part. You took {{ total_steps }} steps when everything felt impossible.
+    </p>
+
+    <div class="completed-steps-card" style="margin-top:24px;">
+      <div class="completed-steps-label">You completed</div>
+      {% for step in steps %}
+      <div class="completed-step-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" flex-shrink="0" aria-hidden="true" style="flex-shrink:0; margin-top:1px;">
+          <circle cx="7" cy="7" r="6.25" stroke="#4CAF82" stroke-width="1"/>
+          <path d="M4.5 7l2 2 3-3.5" stroke="#4CAF82" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ step }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <a href="/" class="btn-primary-purple" style="text-decoration:none; margin-top:24px;">
+      Start something new
+    </a>
+
+  </div>
+</div>
+{% endblock %}

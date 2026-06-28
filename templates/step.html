@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block header_right %}
+<div class="header-task-name" title="{{ task }}">
+    Task: {{ task }}
+</div>
+<button type="button" class="btn-ghost" style="margin-left: 8px;" 
+  hx-post="/feedback/{{ session_id }}" 
+  hx-vals='{"action": "quit"}'
+  hx-swap="none">
+    <span aria-hidden="true">✕</span> Quit
+</button>
+{% endblock %}
+
+{% block content %}
+<!-- OOB Progress Bar Target -->
+<div id="progress-bar-container" style="margin: 0 -24px;">
+    {% include "partials/progress_bar.html" %}
+</div>
+
+<div class="step-section">
+    <!-- HTMX Target for Step Card Swaps -->
+    <div id="step-container">
+        {% include "partials/step_card.html" %}
+    </div>
+</div>
+{% endblock %}

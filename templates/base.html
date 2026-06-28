@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FocusBuddy</title>
+  <meta name="description" content="FocusBuddy is an AI-powered behavioral assistant designed to help you take the first step when anxiety feels overwhelming.">
+  <meta name="theme-color" content="#F8F7FF">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+
+  {% if clerk_publishable_key %}
+  <script
+    crossorigin="anonymous"
+    data-clerk-publishable-key="{{ clerk_publishable_key }}"
+    src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+    type="text/javascript"
+  ></script>
+  {% endif %}
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body hx-ext="response-targets">
+
+  <header class="global-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo">
+        <span class="logo-dot" aria-hidden="true"></span>
+        FocusBuddy
+      </a>
+      <div class="header-right" id="header-right">
+        {% block header_right %}
+        <button
+          type="button"
+          class="btn-ghost"
+          id="privacy-btn"
+          onclick="document.getElementById('privacy-modal').classList.remove('hidden')"
+          aria-controls="privacy-modal"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <rect x="2" y="5.5" width="8" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1"/>
+            <path d="M4 5.5V3.5a2 2 0 1 1 4 0v2" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+          Privacy Info
+        </button>
+        <div id="clerk-user-button" style="display:none;"></div>
+        {% endblock %}
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <main class="main-content" id="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="global-footer">
+      <p class="footer-disclaimer">
+        FocusBuddy is an AI-powered behavioral assistant designed to help you take
+        the first step when anxiety feels overwhelming. This is not a clinical diagnostic
+        system or medical counselor. If you're experiencing a mental health crisis,
+        please contact a qualified healthcare professional or crisis hotline.
+      </p>
+    </footer>
+  </div>
+
+  <div
+    id="privacy-modal"
+    class="privacy-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="privacy-title"
+  >
+    <div class="privacy-modal">
+      <h2 id="privacy-title">How we protect your data</h2>
+      <p>Your privacy and safety are our top priorities.</p>
+      <ul class="privacy-list">
+        <li>
+          <span class="privacy-label">Local scrubbing —</span>
+          Personal info (emails, phone numbers, etc.) is removed from your text before it ever leaves your browser.
+        </li>
+        <li>
+          <span class="privacy-label">Server scrubbing —</span>
+          We run a second pass of removal on our servers just to be safe.
+        </li>
+        <li>
+          <span class="privacy-label">No tracking —</span>
+          We use local session storage only. No tracking cookies.
+        </li>
+        <li>
+          <span class="privacy-label">Ephemeral data —</span>
+          Your vent sessions are not used to train AI models.
+        </li>
+      </ul>
+      <button
+        type="button"
+        class="btn-primary-dark"
+        onclick="document.getElementById('privacy-modal').classList.add('hidden')"
+      >
+        Got it
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // ── Clerk token cache (used by HTMX and fetch calls globally) ─────────────
+    let _clerkToken = null;
+
+    async function _refreshClerkToken() {
+      if (window.Clerk?.session) {
+        try {
+          _clerkToken = await window.Clerk.session.getToken();
+        } catch (e) {
+          _clerkToken = null;
+        }
+      }
+    }
+
+    // Refresh every 50s (Clerk tokens expire at 60s)
+    setInterval(_refreshClerkToken, 50_000);
+
+    // Attach token synchronously — already cached by the time HTMX fires
+    document.body.addEventListener('htmx:configRequest', (evt) => {
+      if (_clerkToken) evt.detail.headers['Authorization'] = `Bearer ${_clerkToken}`;
+    });
+
+    // Only alert on non-401 errors (401 = auth issue, handled elsewhere)
+    document.body.addEventListener('htmx:responseError', function(evt) {
+      console.error('HTMX error:', evt.detail.xhr.status);
+      if (evt.detail.xhr.status !== 401) {
+        alert('Something went wrong connecting to the server. Please try again.');
+      }
+    });
+  </script>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

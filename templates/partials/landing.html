@@ -1,0 +1,59 @@
+<div class="content-centered">
+  <div class="card-ingest step-animate-in">
+
+    <!-- Left panel: hero -->
+    <div class="panel-left">
+      <div>
+        <div class="section-label" style="color:rgba(255,255,255,0.5); margin-bottom:12px;">Task rescue mode</div>
+        <h1 class="text-hero">What's hanging over your head right now?</h1>
+        <p style="font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin:10px 0 20px;">
+          ( Vent it all out. No judgment. )
+        </p>
+
+        <div class="example-box">
+          <div class="example-box-label">Example</div>
+          <div class="example-box-text">
+            "I have to write a performance review for my direct report and it's 2 weeks overdue and every time I open the doc my brain goes blank and I feel like a terrible manager."
+          </div>
+        </div>
+      </div>
+
+      <div class="trust-list">
+        <div class="trust-item"><span class="trust-item-dot"></span>Private and encrypted</div>
+        <div class="trust-item"><span class="trust-item-dot"></span>Response in under 3 seconds</div>
+        <div class="trust-item"><span class="trust-item-dot"></span>Built for ADHD minds</div>
+      </div>
+    </div>
+
+    <!-- Right panel: sign-in prompt -->
+<div class="panel-right" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px;">
+  <div style="text-align:center;">
+    <div class="section-label" style="margin-bottom:12px;">
+      <span style="color:#7C6FFF; margin-right:3px;">·</span> Ready to unstick yourself?
+    </div>
+    <p style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.6; max-width:260px; margin:0 auto;">
+      Sign in to get your personalised action steps and track your completed tasks.
+    </p>
+  </div>
+
+  <button
+    type="button"
+    id="get-started-btn"
+    class="btn-primary-dark"
+    style="width:100%; max-width:260px; padding:14px 24px; font-size:14px;"
+  >
+    Get Started
+  </button>
+
+  <div class="trust-list" style="margin-top:0;">
+    <div class="trust-item"><span class="trust-item-dot"></span>Free to use</div>
+    <div class="trust-item"><span class="trust-item-dot"></span>No credit card needed</div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('get-started-btn').addEventListener('click', () => {
+    // Redirect to Clerk hosted sign-in page — no modal, no UI component errors
+    window.location.href = window.Clerk.buildSignInUrl({ redirectUrl: window.location.href });
+  });
+</script>
