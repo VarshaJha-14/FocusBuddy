@@ -27,7 +27,7 @@ This is a pre-launch MVP landing page built to validate demand for FocusBuddy be
 - **How it works** — 4-step flow from anxiety dump to first micro-step
 - **Competitor comparison** — why Notion, Todoist, and ChatGPT don't solve this
 - **Pricing tiers** — Free / Premium / Institutional
-- **Live AI demo link** — working FocusBuddy prototype powered by Claude
+- **Live AI demo link** — working FocusBuddy prototype powered by github
 
 ---
 
