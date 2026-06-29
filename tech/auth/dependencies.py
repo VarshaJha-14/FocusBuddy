@@ -3,7 +3,7 @@ auth/dependencies.py — Shared FastAPI dependencies, importable without circula
 """
 
 import os
-from auth.clerk import make_auth_dependency
+from tech.auth.clerk import make_auth_dependency
 
 CLERK_PUBLISHABLE_KEY = os.environ.get("CLERK_PUBLISHABLE_KEY")
 

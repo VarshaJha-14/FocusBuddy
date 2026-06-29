@@ -16,9 +16,9 @@ from fastapi import APIRouter, Depends, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from ai.downscale import downscale_step
-from db.session import get_session, advance_step, log_feedback
-from auth.dependencies import get_current_user_id
+from tech.ai.downscale import downscale_step
+from tech.db.session import get_session, advance_step, log_feedback
+from tech.auth.dependencies import get_current_user_id
 
 logger = logging.getLogger(__name__)
 

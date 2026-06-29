@@ -14,7 +14,7 @@ from typing import Optional
 
 from groq import AsyncGroq
 
-from db.models import DownscaleResponse
+from tech.db.models import DownscaleResponse
 
 logger = logging.getLogger(__name__)
 

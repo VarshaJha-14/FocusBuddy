@@ -10,7 +10,7 @@ import logging
 from datetime import datetime
 from typing import Optional
 
-from db.models import (
+from tech.db.models import (
     CREATE_SESSIONS_TABLE,
     CREATE_FEEDBACK_TABLE,
     SessionData,

@@ -15,7 +15,7 @@ from typing import Optional
 
 from groq import AsyncGroq
 
-from db.models import LLMResponse
+from tech.db.models import LLMResponse
 
 logger = logging.getLogger(__name__)
 

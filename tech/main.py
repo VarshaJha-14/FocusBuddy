@@ -15,12 +15,12 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from db.session import init_db
-from auth.dependencies import CLERK_PUBLISHABLE_KEY
-from routes.ingest import router as ingest_router
-from routes.steps import router as steps_router
-from routes.feedback import router as feedback_router
-from routes.transcribe import router as transcribe_router
+from tech.db.session import init_db
+from tech.auth.dependencies import CLERK_PUBLISHABLE_KEY
+from tech.routes.ingest import router as ingest_router
+from tech.routes.steps import router as steps_router
+from tech.routes.feedback import router as feedback_router
+from tech.routes.transcribe import router as transcribe_router
 
 # Configure logging
 logging.basicConfig(
@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     """Initialize database on startup."""
     db_path = os.environ.get("DATABASE_PATH", "focusbuddy.db")
-    import db.session as db_session
+    import tech.db.session as db_session
     db_session.DATABASE_PATH = db_path
     await init_db(db_path)
     logger.info("FocusBuddy is ready! 🚀")

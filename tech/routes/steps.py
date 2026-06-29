@@ -13,8 +13,8 @@ from fastapi import APIRouter, Depends, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from db.session import get_session
-from auth.dependencies import get_current_user_id
+from tech.db.session import get_session
+from tech.auth.dependencies import get_current_user_id
 
 logger = logging.getLogger(__name__)
 

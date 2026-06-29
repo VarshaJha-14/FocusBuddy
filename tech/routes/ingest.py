@@ -14,12 +14,12 @@ from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from ai.safety import scrub_pii, check_crisis
-from ai.prompt import build_prompt
-from ai.engine import generate_steps
-from db.models import SessionData
-from db.session import create_session, get_completed_sessions
-from auth.dependencies import get_current_user_id
+from tech.ai.safety import scrub_pii, check_crisis
+from tech.ai.prompt import build_prompt
+from tech.ai.engine import generate_steps
+from tech.db.models import SessionData
+from tech.db.session import create_session, get_completed_sessions
+from tech.auth.dependencies import get_current_user_id
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +33,7 @@ async def root(request: Request):
     Outer shell page — loads Clerk JS and lets the frontend decide
     whether to show /landing or /workspace based on auth state.
     """
-    from main import CLERK_PUBLISHABLE_KEY
+    from tech.main import CLERK_PUBLISHABLE_KEY
     return templates.TemplateResponse(
         request,
         "ingest.html",
