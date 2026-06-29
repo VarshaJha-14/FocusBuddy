@@ -285,7 +285,6 @@ The UX is intentionally linear — no sidebars, no dashboards, no notification b
 
 **→ [View Interactive Figma Prototype](https://www.figma.com/make/1SOA9Sv3Z7rGYOuLp15SUB/User-flow-creation?codenode-id=0-9&p=f&t=zSV0PM7Q3cuTu5FH-0&fullscreen=1)**
 
-> 💡 *Add screenshots from your Figma prototype into `/assets/` and embed them here for maximum recruiter impact.*
 
 ---
 
