@@ -309,12 +309,12 @@ If this moved into live beta, here's the prioritized validation roadmap:
 
 | Document | Contents |
 |---|---|
-| [01 — Product Discovery & Strategy](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Documents/01_Product_Discovery_and_Strategy.pdf) | Problem framing, user research insights, personas, JTBD, value proposition, MVP scope, RICE prioritization |
-| [02 — PRD & Agile Backlog](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Documents/02_PRD_and_Agile_Backlog.pdf) | Product objectives, user stories, acceptance criteria, functional & non-functional requirements, risk register, sprint backlog |
-| [03 — AI Feature & Responsible AI](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Documents/03_AI_Feature_and_Responsible_AI.pdf) | AI capability stack, input/output matrix, workflow diagram, data architecture, failure cases, guardrails matrix, transparency strategy |
-| [04 — Metrics, Experimentation & GTM](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Documents/04_Metrics_Experimentation_and_GTM.pdf) | North Star Metric, KPI framework, AARRR funnel, A/B test design, dashboard plan, GTM strategy, pricing model |
-| [05 — Wireframes & User Flow](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Documents/05_Wireframes_and_User_Flow.pdf) | Core user flow diagram, low-fidelity wireframes, UX design rationale, high-fidelity Figma prototype screens |
-| [06 — AI Tool Usage Appendix](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Documents/06_AI_Tool_Usage_Appendix.pdf) | Transparent log of AI tools used (ChatGPT, Claude, Gemini), prompts used, how outputs were reviewed and modified |
+| [01 — Product Discovery & Strategy](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/01_Product_Discovery_and_Strategy.pdf) | Problem framing, user research insights, personas, JTBD, value proposition, MVP scope, RICE prioritization |
+| [02 — PRD & Agile Backlog](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/02_PRD_and_Agile_Backlog.pdf) | Product objectives, user stories, acceptance criteria, functional & non-functional requirements, risk register, sprint backlog |
+| [03 — AI Feature & Responsible AI](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/03_AI_Feature_and_Responsible_AI.pdf) | AI capability stack, input/output matrix, workflow diagram, data architecture, failure cases, guardrails matrix, transparency strategy |
+| [04 — Metrics, Experimentation & GTM](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/04_Metrics_Experimentation_and_GTM.pdf) | North Star Metric, KPI framework, AARRR funnel, A/B test design, dashboard plan, GTM strategy, pricing model |
+| [05 — Wireframes & User Flow](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/05_Wireframes_and_User_Flow.pdf) | Core user flow diagram, low-fidelity wireframes, UX design rationale, high-fidelity Figma prototype screens |
+| [06 — AI Tool Usage Appendix](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/06_AI_Tool_Usage_Appendix.pdf) | Transparent log of AI tools used (ChatGPT, Claude, Gemini), prompts used, how outputs were reviewed and modified |
 
 ---
 
