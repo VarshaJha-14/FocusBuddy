@@ -2,7 +2,7 @@
 
 > A Dropbox-style MVP validation page for FocusBuddy, an AI co-pilot for task paralysis and executive dysfunction.
 
-**Live site:** [FocusBuddy]
+**Live site:** [FocusBuddy MVP] (https://varshajha-14.github.io/FocusBuddy/)
 **Full PM case study:** [github.com/VarshaJha-14/focusbuddy-pm-case-study](https://github.com/VarshaJha-14/FocusBuddy/tree/main/Documents)  
 
 ---
