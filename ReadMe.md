@@ -5,8 +5,10 @@
 > — Rohan, Final-Year CS Student (Primary Persona)
 
 > **Live site:** [FocusBuddy](https://focusbuddy-wbo3.onrender.com)
+
+
 > **Demo for Stakeholders** 
-(https://www.loom.com/share/d588100bf5944031bf248e8a526b0e32)
+https://www.loom.com/share/d588100bf5944031bf248e8a526b0e32
 
 **FocusBuddy** is a full end-to-end PM case study — from zero-to-one product discovery through PRD, responsible AI design, metrics framework, and go-to-market strategy. It explores how conversational AI can break the neurological freeze response that prevents neurodivergent users from initiating tasks.
 
