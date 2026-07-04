@@ -1,5 +1,5 @@
 # ⚡ FocusBuddy
-### AI Co-Pilot for Task Paralysis & Executive Dysfunction
+### Adaptive AI Companion for Task Paralysis & Executive Dysfunction
 
 > *"I know exactly what I need to do. I just can't seem to start."*
 > — Rohan, Final-Year CS Student (Primary Persona)
@@ -7,14 +7,15 @@
 > **Live site:** [FocusBuddy](https://focusbuddy-wbo3.onrender.com)
 
 
-> **Demo for Stakeholders** 
+> **Demo for Stakeholders**
 https://www.loom.com/share/d588100bf5944031bf248e8a526b0e32
 
-**FocusBuddy** is a full end-to-end PM case study — from zero-to-one product discovery through PRD, responsible AI design, metrics framework, and go-to-market strategy. It explores how conversational AI can break the neurological freeze response that prevents neurodivergent users from initiating tasks.
+**FocusBuddy** is a full end-to-end PM case study — from zero-to-one product discovery through PRD, responsible AI design, metrics framework, go-to-market strategy, and **post-launch self-verification**. It explores how conversational AI can break the neurological freeze response that prevents neurodivergent users from initiating tasks — and how that thesis evolved once it was pressure-tested against real usage.
 
 ![Status](https://img.shields.io/badge/Status-Case%20Study%20%7C%20MVP%20Concept-blueviolet)
 ![Type](https://img.shields.io/badge/Type-Product%20Management%20Portfolio-informational)
 ![Domain](https://img.shields.io/badge/Domain-AI%20%7C%20Mental%20Health%20%7C%20Productivity-success)
+![Update](https://img.shields.io/badge/Updated-Post--Launch%20Validation%20Complete-orange)
 
 ---
 
@@ -23,6 +24,7 @@ https://www.loom.com/share/d588100bf5944031bf248e8a526b0e32
 - [The Problem](#-the-problem)
 - [My Role](#-my-role)
 - [Product Overview](#-product-overview)
+- [🔄 Post-Launch Validation: Assumptions We Got Wrong](#-post-launch-validation-assumptions-we-got-wrong)
 - [Key Product Decisions & Tradeoffs](#-key-product-decisions--tradeoffs)
 - [Feature Prioritization (RICE)](#-feature-prioritization-rice)
 - [AI Design & Responsible AI Guardrails](#-ai-design--responsible-ai-guardrails)
@@ -68,55 +70,106 @@ End-to-end product case study across the full PM lifecycle:
 - ✅ A/B test design and experimentation plan
 - ✅ Freemium pricing strategy and GTM planning
 - ✅ Wireframes and Figma prototype
+- ✅ **Post-deployment self-verification — auditing my own founding assumptions and evolving the product accordingly**
 
 ---
 
 ## 🚀 Product Overview
 
-**FocusBuddy** is a conversational AI companion that lives inside the tools users already use — Slack, WhatsApp, Discord — and acts as an on-demand executive function co-pilot.
+**FocusBuddy** started as a conversational AI companion that lives inside the tools users already use — Slack, WhatsApp, Discord — and breaks tasks into micro-steps on demand.
 
-**One-liner:**
-> FocusBuddy is the AI co-pilot for people with ADHD and executive dysfunction, breaking the cycle of task paralysis through gentle, conversational nudges that meet users where they already are.
+Since the MVP concept was deployed, a self-verification pass (see the [section below](#-post-launch-validation-assumptions-we-got-wrong)) surfaced that "breaking tasks into micro-steps" was solving for the wrong root cause for a large share of users. FocusBuddy's positioning has evolved as a result — **from a Task Breakdown AI to an Adaptive Support AI.**
 
-**Jobs-to-Be-Done:**
+**Updated one-liner:**
+> FocusBuddy is an adaptive AI companion for people with ADHD and executive dysfunction. It first identifies the specific barrier keeping someone stuck — emotional resistance, overwhelm, perfectionism, demand avoidance, or a genuine planning gap — and only then responds with the intervention suited to that moment, not a one-size-fits-all micro-step.
+
+**Original Jobs-to-Be-Done (still holds for the planning-gap segment):**
 > When I am frozen in an overwhelming state of task paralysis and drowning in guilt over a looming deadline, I want to immediately offload my unstructured anxiety to a gentle, objective system that isolates a singular, low-stakes micro-action, so that I can break the neurological freeze response and build friction-free momentum without feeling judged.
 
-### How It Works
+**Expanded JTBD (post-validation, for the emotional-barrier segment):**
+> When I already know what I need to do but can't make myself start, I want a companion that recognizes I don't need a plan — I need my emotional state acknowledged and the right kind of support offered — so that I can move from stuck to started without feeling managed, patronized, or judged.
+
+### How It Works (Updated)
 
 ```
 User types/speaks chaotic anxiety dump
          ↓
-AI strips emotional noise → identifies core task
+Adaptive Intervention Engine identifies:
+   (a) what's blocking the user — planning gap vs. emotional barrier
+   (b) what kind of support they currently want
          ↓
-Single micro-step displayed (ONE step, nothing else)
+   ┌────────────────────────┬─────────────────────────────┐
+   │ Planning gap detected  │ Emotional barrier detected   │
+   │ → Micro-Step Engine    │ → Support Mode Router         │
+   │   (single next action) │   (Gentle Companion / Coach / │
+   │                        │    Listener / Organizer /     │
+   │                        │    Silent Accountability /    │
+   │                        │    Emotional Reset Mode)      │
+   └────────────────────────┴─────────────────────────────┘
          ↓
-User clicks [Done → Next Step] or [Too Hard / Stuck]
+User clicks [Done → Next Step], [Too Hard / Stuck], or simply exits the flow
          ↓
-If "Too Hard": AI generates an even smaller sub-action
-If "Done": momentum builds → next step revealed
-         ↓
-Completion reward screen: "You started. That's the hardest part."
+Reward isn't just "task done" — it's recognizing that starting, or even
+just naming the feeling, already counts as progress.
 ```
 
-### MVP Feature Set
+### MVP Feature Set (Updated)
 
-| Feature | Why It's In Scope |
-|---|---|
-| Vent-Capture Engine | Lowest-friction entry point — accepts raw, unstructured anxiety dumps |
-| Natural Language Sifter | Extracts the real task from emotional noise |
-| Single-Step Progressive Interface | Hides all future steps to eliminate anticipatory overwhelm |
-| Adaptive Micro-Step Engine | Shrinks tasks past the "Absurdity Threshold" (e.g., "Just open the document") |
-| Dynamic Strategy Toggles | Adapts AI tone to cognitive state: Terrified / Bored / Low Energy |
-| Dynamic Step Size Calibration | "Too Hard" button triggers automatic downscaling |
-| Lightweight Session Feedback | One-tap post-session check-in to measure freeze-break success |
+| Feature | Why It's In Scope | Status |
+|---|---|---|
+| Vent-Capture Engine | Lowest-friction entry point — accepts raw, unstructured anxiety dumps | Original MVP |
+| Natural Language Sifter | Extracts the real task from emotional noise | Original MVP |
+| Single-Step Progressive Interface | Hides all future steps to eliminate anticipatory overwhelm | Original MVP |
+| Adaptive Micro-Step Engine | Shrinks tasks past the "Absurdity Threshold" (e.g., "Just open the document") | Original MVP |
+| Dynamic Strategy Toggles | Adapts AI tone to cognitive state: Terrified / Bored / Low Energy | Original MVP |
+| Dynamic Step Size Calibration | "Too Hard" button triggers automatic downscaling | Original MVP |
+| Lightweight Session Feedback | One-tap post-session check-in to measure freeze-break success | Original MVP |
+| **Adaptive Intervention Engine** | Identifies *what type of support the user wants* before deciding whether/how to intervene — some users want less interaction, not more | **Added post-validation** |
+| **Multiple Support Modes** (🌱 Gentle Companion · 🎯 Coach · 💛 Listener · 📝 Organizer · ⏳ Silent Accountability) | Micro-steps don't work for everyone — some users feel patronized or controlled by being handed instructions | **Added post-validation** |
+| **Dynamic Personality Engine** | Tone sensitivity varies: some want encouragement, others neutrality, humour, or silence | **Added post-validation** |
+| **Adaptive Reminder Frequency** | Fixed daily check-ins became guilt triggers for some users | **Added post-validation** |
+| **Emotional Reset Mode** | Some sessions don't need a task path at all — they need emotional regulation first | **Added post-validation** |
 
-**Intentionally excluded from MVP:** Calendar integrations, productivity dashboards, gamification/streaks, social accountability rooms, historical analytics. Each was excluded deliberately — not by default.
+**Intentionally still excluded from MVP:** Calendar integrations, productivity dashboards, gamification/streaks, social accountability rooms, historical analytics. Each was excluded deliberately — not by default.
+
+---
+
+## 🔄 Post-Launch Validation: Assumptions We Got Wrong
+
+Most PM case studies stop at "here's the product." This section exists because very few PM case studies show *how the product changed when its own assumptions were challenged* — and that distinction is the point.
+
+After the MVP concept was live, I ran a self-verification pass against the founding assumptions behind FocusBuddy. Several didn't hold up. Rather than quietly patching the product, I'm documenting the full reasoning trail: **assumption → validation insight → product decision.**
+
+A companion deep-dive — with the full reasoning behind each shift — lives in [**07 — Assumption Validation & Product Evolution Log**](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/07_Assumption_Validation_and_Product_Evolution_Log.pdf).
+
+| Initial Assumption | What We Learned | Product Evolution |
+|---|---|---|
+| Users don't know where to start | Many know exactly what to do — the barrier isn't planning | Focus on emotional friction (resistance, overwhelm, perfectionism, demand avoidance, anxiety) instead of planning |
+| Micro-steps help everyone | Some users feel patronized, controlled, or overwhelmed by being handed instructions | Multiple support modes: Gentle Companion, Coach, Listener, Organizer, Silent Accountability |
+| The AI should proactively guide users | Some users want *less* interaction, not more | Adaptive Intervention Engine — identifies what support the user wants before deciding how to intervene |
+| Productivity equals task completion | Starting is often the hardest — and most meaningful — win | North Star shifts to include Task Initiation Confidence, alongside Task Activation Velocity |
+| One conversational style fits everyone | Tone sensitivity varies — encouragement, neutrality, humour, or silence, sometimes even for the same user on different days | Dynamic Personality Engine |
+| Daily check-ins increase engagement | For some users, notifications became guilt triggers rather than motivators | Adaptive Reminder Frequency |
+| Users always want to solve the task in front of them | Sometimes users don't need productivity help — they need emotional regulation first | Emotional Reset Mode, as an alternative path to tasks, not a replacement for them |
+| Executive dysfunction is one uniform problem | ADHD, autism, burnout, depression, anxiety, and sleep deprivation can all produce near-identical surface behaviour | Design around **task initiation barriers**, not diagnoses — broadening the product while staying true to its original purpose |
+
+### Vision, before and after
+
+**Old vision:** An AI that helps users start tasks.
+
+**New vision:** An adaptive AI companion that identifies the specific barrier preventing action and responds with the most supportive intervention for that moment.
+
+### Product Evolution Timeline
+
+```
+Discovery → Initial MVP → Assumption Review → Product Validation → Adaptive Companion → Future Learning System
+```
 
 ---
 
 ## 🧩 Key Product Decisions & Tradeoffs
 
-These are the hardest calls made during the design process, and why.
+These are the hardest calls made during the design process, and why. (Two additional decisions from the post-launch validation pass are included at the end.)
 
 **1. No streaks. No dashboards. No gamification.**
 
@@ -138,6 +191,14 @@ Neurodivergent users experience the "ADHD Tax" — a pattern of buying productiv
 
 High engineering cost, but more importantly: task paralysis doesn't wait for integrations to sync. The fastest path to validating the core initiation hypothesis is a zero-setup, zero-sync text box. Integrations can be added after proving the core mechanism works.
 
+**6. Micro-steps became a *mode*, not the entire product. *(Post-validation)***
+
+Once it became clear that a meaningful share of users already know what to do, hard-coding micro-steps as the only intervention would have actively pushed them away. Micro-stepping is now one support mode among several, selected by the Adaptive Intervention Engine rather than assumed by default.
+
+**7. The AI is allowed to do less. *(Post-validation)***
+
+The original design assumed more proactive AI guidance was always better. Validation showed the opposite for some users: reduced interaction, silence, or a single accountability check-in outperformed active coaching. FocusBuddy now treats "intervene less" as a legitimate, deliberately-chosen output — not a failure state.
+
 ---
 
 ## 📊 Feature Prioritization (RICE)
@@ -157,6 +218,8 @@ RICE Score = (Reach × Impact × Confidence) / Effort
 | Historical Analytics | 150 | 0.5 | 50% | 3.0 | **12.5** | Won't-Have |
 | Public Accountability Rooms | 120 | 1.0 | 40% | 4.0 | **12.0** | Won't-Have |
 
+> **Post-validation note:** the Adaptive Intervention Engine, Multiple Support Modes, and Dynamic Personality Engine were not part of the original RICE pass — they emerged from the assumption audit above. They are being scoped and RICE-scored for the next iteration rather than retrofitted into this table, to keep this scorecard an honest artifact of the original MVP decision process.
+
 ---
 
 ## 🤖 AI Design & Responsible AI Guardrails
@@ -166,9 +229,9 @@ RICE Score = (Reach × Impact × Confidence) / Effort
 FocusBuddy combines five AI capabilities in sequence:
 1. **Conversational AI** — interprets vague, emotional, ungrammatical input
 2. **Summarization** — extracts the real task from the anxiety dump
-3. **Classification** — identifies cognitive state (overwhelmed / avoiding / low energy)
-4. **Personalization Engine** — adapts step size and tone to user's current capacity
-5. **AI Agent Workflow** — loops through task initiation and step progression
+3. **Classification** — identifies cognitive state (overwhelmed / avoiding / low energy) **and, post-validation, the type of barrier (planning gap vs. emotional resistance) and the type of support currently wanted**
+4. **Personalization Engine** — adapts step size and tone to user's current capacity, and now selects among support modes
+5. **AI Agent Workflow** — loops through task initiation and step progression, or through a non-task support mode when that's what's needed
 
 ### AI Workflow
 
@@ -190,22 +253,27 @@ FocusBuddy combines five AI capabilities in sequence:
 | Overdependence | User loses autonomous initiation ability | Progressive autonomy: as momentum builds, AI shifts from directive ("Open the document") to open-ended ("What feels right next?") |
 | Cultural bias | Western productivity steps misaligned with Indian academic/professional norms | Few-shot templates calibrated for Indian context; hierarchical communication norms accounted for |
 | Confidently wrong output | User does unnecessary or incorrect work | All steps framed as suggestions: "Based on what you shared, try this…" Binary feedback on every card |
+| **Mode mismatch** *(post-validation)* | AI defaults to micro-steps for a user who needs emotional support, reads as tone-deaf or patronizing | Adaptive Intervention Engine classifies barrier type and desired support level before selecting a mode; user can override the selected mode at any time |
+| **Diagnostic overreach** *(post-validation)* | AI implicitly labels a user's condition (ADHD, autism, burnout, etc.) based on behaviour | FocusBuddy is explicitly designed around *barriers*, not diagnoses — it never infers or states a clinical condition |
 
 ### AI Transparency Commitments
 - Persistent UI label: *"FocusBuddy is an automated AI co-pilot, not a human or clinical tool."*
 - Mandatory first-session disclaimer modal before any interaction
 - Every step card includes binary feedback: `[✓ Match]` / `[↓ Too Complex]`
 - Low-confidence outputs display: *"I had limited context — does this feel right?"*
+- **New:** users can always see and manually switch their current Support Mode — the AI's classification is a suggestion, never a lock
 
 ---
 
 ## 📈 North Star Metric & KPIs
 
-### North Star: Task Activation Velocity (TAV)
+### North Star: Task Activation Velocity (TAV) — now paired with Task Initiation Confidence
 
-**Definition:** Average time from "Vent Capture" submission → first `[Done — Next Step]` tap.
+**Definition (TAV):** Average time from "Vent Capture" submission → first `[Done — Next Step]` tap.
 
 **Why this, not "time in app":** For an executive dysfunction tool, success means getting the user *out* of the app and *into* their work as fast as possible. A falling TAV directly proves the freeze response was broken.
+
+**Post-validation addition — Task Initiation Confidence (TIC):** a self-reported, one-tap measure of whether the user felt able to start *something*, taken at the end of every session — including sessions where no task step was ever generated (e.g., Emotional Reset Mode). This was added because the assumption that "productivity equals task completion" didn't hold: for a meaningful share of sessions, simply starting — or even just naming the feeling — was the actual win, and TAV alone can't capture that when no task step exists.
 
 ### Supporting KPIs
 
@@ -215,18 +283,20 @@ FocusBuddy combines five AI capabilities in sequence:
 | Calibration Trigger Rate | % of sessions where "Too Hard" is clicked on Step 1 | Tracks whether baseline prompts are over-scoping |
 | Rescue Success Rate | % of sessions where user completes the full micro-sequence | End-to-end session efficacy |
 | 7-Day / 30-Day Cohort Retention | % of users returning weekly | Proves habit formation, not novelty |
+| **Support Mode Distribution** *(new)* | Share of sessions per mode (Gentle Companion / Coach / Listener / Organizer / Silent Accountability / Emotional Reset) | Confirms whether the single-mode assumption would have underserved most of the user base |
+| **Reminder Opt-Down Rate** *(new)* | % of users who reduce reminder frequency when offered | Validates whether adaptive reminders are actually reducing guilt-driven disengagement |
 
 ### AARRR Funnel
 
 | Stage | User Action | Key Metric |
 |---|---|---|
 | Acquisition | Visits via community post / referral / short-form video | Sign-Up Conversion Rate |
-| **Activation** | Completes first Task Rescue session; marks ≥1 step Done | **First-Time Activation Rate** ← primary MVP focus |
+| **Activation** | Completes first session in *any* support mode; reports ≥1 point of Task Initiation Confidence | **First-Time Activation Rate** ← primary MVP focus |
 | Retention | Returns for additional sessions after first experience | D7 / D30 Retention Rate |
 | Revenue | Upgrades to Premium | Free-to-Paid Conversion, MRR |
 | Referral | Shares with community | K-Factor, Invites Sent Per User |
 
-*Revenue is not a primary MVP focus. The objective is to validate whether AI-guided micro-steps successfully improve task initiation before monetizing.*
+*Revenue is not a primary MVP focus. The objective is to validate whether adaptive, barrier-aware support improves task initiation before monetizing.*
 
 ---
 
@@ -247,25 +317,27 @@ If we present users with a single blank input field rather than mandatory cognit
 - Success: ≥20% lift in First-Time Activation Rate, p < 0.05, n ≥ 500 per variant
 - If inconclusive at 14 days: extend 7 days, then default to Variant B (lower cognitive load)
 
+**Post-validation follow-up test (proposed):** Once the Adaptive Intervention Engine ships, re-run this test with a Variant C that skips explicit *and* implicit categorization on the first turn, and instead asks a single open question — *"What kind of support do you want right now?"* — to test whether asking directly outperforms inferring silently.
+
 ---
 
 ## 🗺 Go-To-Market Strategy
 
-**Positioning:**
-> For overwhelmed minds trapped in task paralysis, FocusBuddy is the zero-friction AI co-pilot that converts mental freeze into physical momentum. Unlike traditional planner apps that make you organize your day, FocusBuddy meets you in your moment of crisis and gives you just your next achievable step.
+**Positioning (updated):**
+> For overwhelmed minds trapped in task paralysis, FocusBuddy is the adaptive AI companion that first understands what's actually keeping you stuck, then meets you with the kind of support that helps — whether that's a single next step, a listening ear, or just quiet company. Unlike traditional planner apps that make you organize your day, and unlike single-mode AI tools that assume everyone needs the same kind of push, FocusBuddy adapts to the moment.
 
 **Launch channels:**
 1. **Organic community seeding** — r/ADHD, r/productivity, neurodivergent Discord servers. Non-promotional. Value-first.
-2. **Short-form video** — Raw screen recordings: panic text in → absurdly small step out. TikTok / Reels / YouTube Shorts.
+2. **Short-form video** — Raw screen recordings: panic text in → absurdly small step out (or, now, a quiet check-in when that's what's needed). TikTok / Reels / YouTube Shorts.
 3. **Micro-influencer partnerships** — ADHD coaches and accessibility advocates doing live testing.
 
-**Key message:** *"Stop planning. Stop organizing. Just tell us what you're stuck on, and let's take the first step together."*
+**Key message (updated):** *"Stop assuming you need a plan. Tell us what's stuck, and let's figure out — together — what kind of help actually gets you moving."*
 
 ### Pricing
 
 | Tier | Price | What's Included |
 |---|---|---|
-| **Free** | ₹0/month | Unlimited Task Rescue sessions, full micro-step UI, all cognitive toggles, crisis modal |
+| **Free** | ₹0/month | Unlimited Task Rescue sessions, full micro-step UI, all support modes, all cognitive toggles, crisis modal |
 | **Premium** | ₹399/month | Everything in Free + session history, voice input, Slack/WhatsApp integration, weekly AI pattern summary |
 | **Institutional** | ₹120–180/seat/year | Full Premium + admin dashboard, cohort analytics, crisis event reporting, dedicated CSM |
 
@@ -289,22 +361,27 @@ The UX is intentionally linear — no sidebars, no dashboards, no notification b
 
 **→ [View Interactive Figma Prototype](https://www.figma.com/make/1SOA9Sv3Z7rGYOuLp15SUB/User-flow-creation?codenode-id=0-9&p=f&t=zSV0PM7Q3cuTu5FH-0&fullscreen=1)**
 
+> **Post-validation note:** the wireframes above reflect the original micro-step-only flow. A Support Mode selection/confirmation screen (between Screens 1 and 2) is the next wireframing priority, so users can see and override the AI's inferred mode before entering the workspace.
 
 ---
 
 ## 🔭 What I'd Validate Next
 
-If this moved into live beta, here's the prioritized validation roadmap:
+If this moved into live beta, here's the prioritized validation roadmap, updated to include what the assumption audit surfaced:
 
-1. **Does the Absurdity Threshold actually break freezes?** — Track TAV in cohort Week 1. If median TAV > 90 seconds, the steps aren't small enough. Refine few-shot prompt templates.
+1. **Does the Absurdity Threshold actually break freezes — for the planning-gap segment specifically?** — Track TAV in cohort Week 1, split by whether the Adaptive Intervention Engine routed the user to the Micro-Step Engine or another mode. If median TAV for that segment > 90 seconds, the steps aren't small enough. Refine few-shot prompt templates.
 
-2. **Does implicit sentiment detection (Variant B) outperform explicit toggles?** — Run the A/B test described above. This directly determines the onboarding UX direction.
+2. **Does implicit sentiment detection (Variant B) outperform explicit toggles — and does asking directly (Variant C) beat both?** — Run the expanded A/B/C test described above. This directly determines the onboarding UX direction.
 
 3. **Where does the step decomposition fail by task domain?** — Analyze "Too Hard" trigger rates segmented by task category (e.g., studying for exams vs. writing a report). High rates in specific domains flag prompt engineering gaps.
 
-4. **What's the D7 retention shape?** — If users activate but don't return, the product is solving the acute freeze but not forming a habit. Would explore lightweight re-engagement that doesn't rely on streaks or guilt.
+4. **What's the D7 retention shape — and does it vary by Support Mode?** — If users activate but don't return, the product is solving the acute freeze but not forming a habit. Would explore lightweight re-engagement that doesn't rely on streaks or guilt, and check whether certain modes (e.g., Silent Accountability) retain differently than others.
 
 5. **Is there institutional pull before we build for it?** — Run 3 conversations with university welfare officers before building the B2B admin dashboard. Validate whether outcome reporting is a real procurement requirement.
+
+6. **Does the Adaptive Intervention Engine's classification actually match what users say they want? *(new)*** — Compare the AI's inferred barrier type / support mode against a post-session self-report. Misclassification rate here is the single biggest risk to the new positioning — if the engine gets this wrong often, "adaptive" becomes "inconsistent."
+
+7. **Does removing the diagnosis-adjacent framing change how users describe the product to others? *(new)*** — Since the product now optimizes for barriers rather than conditions, check whether word-of-mouth referrals broaden beyond the original ADHD-specific community channels.
 
 ---
 
@@ -318,6 +395,7 @@ If this moved into live beta, here's the prioritized validation roadmap:
 | [04 — Metrics, Experimentation & GTM](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/04_Metrics_Experimentation_and_GTM.pdf) | North Star Metric, KPI framework, AARRR funnel, A/B test design, dashboard plan, GTM strategy, pricing model |
 | [05 — Wireframes & User Flow](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/05_Wireframes_and_User_Flow.pdf) | Core user flow diagram, low-fidelity wireframes, UX design rationale, high-fidelity Figma prototype screens |
 | [06 — AI Tool Usage Appendix](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/06_AI_Tool_Usage_Appendix.pdf) | Transparent log of AI tools used (ChatGPT, Claude, Gemini), prompts used, how outputs were reviewed and modified |
+| **[07 — Assumption Validation & Product Evolution Log](https://github.com/VarshaJha-14/FocusBuddy/blob/main/Product%20Documents/07_Assumption_Validation_and_Product_Evolution_Log.pdf)** | **Post-deployment self-verification: every founding assumption tested, what was learned, and the resulting product decision — from Task Breakdown AI to Adaptive Support AI** |
 
 ---
 
@@ -325,7 +403,7 @@ If this moved into live beta, here's the prioritized validation roadmap:
 
 - **Research:** Primary user interviews + NIMHANS / AIIMS Delhi prevalence data
 - **Framework:** RICE prioritization, AARRR funnel, Jobs-to-Be-Done
-- **AI Tools:** ChatGPT (discovery, AI feature design), Claude (PRD, metrics, critique), Gemini (market research)
+- **AI Tools:** ChatGPT (discovery, AI feature design), Claude (PRD, metrics, critique, post-launch assumption audit), Gemini (market research)
 - **Design:** Figma (wireframes + prototype), Whimsical (user flow diagram)
 - **All final decisions reviewed, validated, and modified by the author. AI outputs were treated as recommendations, not conclusions.**
 
