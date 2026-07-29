@@ -57,8 +57,8 @@ app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), na
 #app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Jinja2 templates (shared across routes)
-templates = Jinja2Templates(directory="templates")
-
+#templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 # Include route routers
 app.include_router(ingest_router)
 app.include_router(steps_router)
