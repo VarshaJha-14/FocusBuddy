@@ -3,7 +3,9 @@ main.py — FastAPI application entry point.
 
 Mounts static files, includes route routers, and initializes the database on startup.
 """
+import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
@@ -51,7 +53,8 @@ app = FastAPI(
 )
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
+#app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Jinja2 templates (shared across routes)
 templates = Jinja2Templates(directory="templates")
