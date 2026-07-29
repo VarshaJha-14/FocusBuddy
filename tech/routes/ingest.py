@@ -19,14 +19,21 @@ from tech.ai.prompt import build_prompt
 from tech.ai.engine import generate_steps
 from tech.db.models import SessionData
 from tech.db.session import create_session, get_completed_sessions
-from tech.auth.dependencies import get_current_user_id
+from tech.auth.dependencies import (
+    get_current_user_id,
+    CLERK_PUBLISHABLE_KEY,
+)
 
 logger = logging.getLogger(__name__)
 
 #router = APIRouter()
 #templates = Jinja2Templates(directory="templates")
 router = APIRouter()
-from tech.main import templates
+import os
+from fastapi.templating import Jinja2Templates
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 @router.get("/", response_class=HTMLResponse)
 async def root(request: Request):
@@ -34,7 +41,7 @@ async def root(request: Request):
     Outer shell page — loads Clerk JS and lets the frontend decide
     whether to show /landing or /workspace based on auth state.
     """
-    from tech.main import CLERK_PUBLISHABLE_KEY
+   
     return templates.TemplateResponse(
         request,
         "ingest.html",
