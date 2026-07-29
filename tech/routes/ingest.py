@@ -23,9 +23,10 @@ from tech.auth.dependencies import get_current_user_id
 
 logger = logging.getLogger(__name__)
 
+#router = APIRouter()
+#templates = Jinja2Templates(directory="templates")
 router = APIRouter()
-templates = Jinja2Templates(directory="templates")
-
+from tech.main import templates
 
 @router.get("/", response_class=HTMLResponse)
 async def root(request: Request):
